@@ -10,6 +10,7 @@ const Counter = () => {
   and now this component has the latest updated version of state.counter 
   which is automatically manage by redux behind the scenes*/
   const counter = useSelector(state => state.counter);
+  const show = useSelector(state => state.showCounter);
 
   //use dispatch is a function that allow us to dispatch actions to our store
   const dispatch = useDispatch();
@@ -22,12 +23,14 @@ const Counter = () => {
     dispatch({ type: 'decrement' });
   };
 
-  const toggleCounterHandler = () => { };
+  const toggleCounterHandler = () => {
+    dispatch({type: 'toggle'})
+   };
 
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{counter}</div>
+      {show && <div className={classes.value}>{counter}</div>}
       <div>
         <button onClick={incrementHandler}>Increment</button>
         <button onClick={decrementHandler}>Decrement</button>
